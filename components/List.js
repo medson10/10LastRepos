@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, Text, FlatList } from 'react-native';
 import styled from 'styled-components/native';
+import {compose, pure} from 'recompose';
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 
 const Container = styled.View`
   background-color: #EFEFEF;
@@ -10,13 +13,33 @@ const Container = styled.View`
   height: 400px;
 `;
 
-export default class List extends React.Component {
-
-  render() {
-    return (
-      <Container>
-        <FlatList data={this.props.list} renderItem={({item}) => <Text>{item.key}</Text>}></FlatList>
-      </Container>
-    );
+const query = gql`
+  query LastRepositories($username: String) {
+    repositoryOwner (login: $username) {
+      repositories(last: 10) {
+        nodes {
+          name
+          description
+          forkCount
+          isPrivate
+        }
+      }
+    }
   }
-}
+`;
+
+const data = graphql(query, {
+  options: (props) => {
+    variables: {username: props.username}
+  }
+});
+
+const Page = ({data: { loading, repositories}}) =>
+    <Container>
+      <FlatList data={repositories} renderItem={({item}) => <Text>{item.key}</Text>}></FlatList>
+    </Container>
+
+export default compose(
+  data,
+  pure
+)(Page);

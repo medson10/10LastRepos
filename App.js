@@ -1,6 +1,12 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, Text } from 'react-native';
 import styled from 'styled-components/native';
+import { ApolloProvider, graphql } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { compose } from 'recompose';
+
 import Home from './components/Home';
 
 const Container = styled.View `
@@ -11,14 +17,19 @@ const Container = styled.View `
   height: 100%;
 `;
 
-export default class App extends React.Component {
+const client = new ApolloClient({
+  link: new HttpLink(
+    { uri: 'https://api.github.com/graphql',
+      headers: {'Authorization': 'Bearer <put your token here>'}
+    }),
+  cache: new InMemoryCache()
+});
 
-  render() {
-    return (
-        <Container>
-          <StatusBar />
-          <Home />
-        </Container>
-    );
-  }
-}
+const Page = () =>
+  <ApolloProvider client={client}>
+    <Container>
+      <Home />
+    </Container>
+  </ApolloProvider>
+
+export default compose()(Page);
