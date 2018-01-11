@@ -1316,7 +1316,7 @@ camelcase@^4.1.0:
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"
-  resolved "http://registry.npmjs.org/capture-stack-trace/-/capture-stack-trace-1.0.0.tgz#4a6fa07399c26bba47f0b2496b4d0fb408c5550d"
+  resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.0.tgz#4a6fa07399c26bba47f0b2496b4d0fb408c5550d"
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -1626,7 +1626,7 @@ crc@3.3.0:
 
 create-error-class@^3.0.0:
   version "3.0.2"
-  resolved "http://registry.npmjs.org/create-error-class/-/create-error-class-3.0.2.tgz#06be7abef947a3f14a30fd610671d401bca8b7b6"
+  resolved "https://registry.yarnpkg.com/create-error-class/-/create-error-class-3.0.2.tgz#06be7abef947a3f14a30fd610671d401bca8b7b6"
   dependencies:
     capture-stack-trace "^1.0.0"
 
@@ -2540,9 +2540,9 @@ graphql-tag@^2.4.2, graphql-tag@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.6.1.tgz#4788d509f6e29607d947fc47a40c4e18f736d34a"
 
-graphql@^0.12.3:
-  version "0.12.3"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.12.3.tgz#11668458bbe28261c0dcb6e265f515ba79f6ce07"
+graphql@^0.11.0:
+  version "0.11.7"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.11.7.tgz#e5abaa9cb7b7cccb84e9f0836bf4370d268750c6"
   dependencies:
     iterall "1.1.3"
 
@@ -4670,8 +4670,8 @@ raw-body@~2.1.2:
     unpipe "1.0.0"
 
 rc@^1.1.7:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/rc/-/rc-1.2.2.tgz#d8ce9cb57e8d64d9c7badd9876c7c34cbe3c7077"
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/rc/-/rc-1.2.3.tgz#51575a900f8dd68381c710b4712c2154c3e2035b"
   dependencies:
     deep-extend "~0.4.0"
     ini "~1.3.0"
@@ -5585,8 +5585,8 @@ styled-components@^2.4.0:
     supports-color "^3.2.3"
 
 stylis@^3.4.0:
-  version "3.4.5"
-  resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.4.5.tgz#d7b9595fc18e7b9c8775eca8270a9a1d3e59806e"
+  version "3.4.7"
+  resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.4.7.tgz#4fa57ef276d1ed20aafda4e1a97c35b5b87d59ce"
 
 superagent-proxy@^1.0.2:
   version "1.0.2"
@@ -5836,8 +5836,8 @@ ua-parser-js@^0.7.9:
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.17.tgz#e9ec5f9498b9ec910e7ae3ac626a805c4d09ecac"
 
 uglify-es@^3.1.8:
-  version "3.3.4"
-  resolved "https://registry.yarnpkg.com/uglify-es/-/uglify-es-3.3.4.tgz#2d592678791e5310456bbc95e952139e3b13167a"
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/uglify-es/-/uglify-es-3.3.5.tgz#cf7e695da81999f85196b15e2978862f13212f88"
   dependencies:
     commander "~2.12.1"
     source-map "~0.6.1"
