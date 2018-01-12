@@ -9,12 +9,27 @@ const Container = styled.View`
   background-color: #EFEFEF;
   border: .6px solid #333;
   margin-top: 20px;
-  width: 320px;
-  height: 400px;
+  width: 340px;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
+const Page = ({data: { loading, repositoryOwner}}) =>
+    <Container>
+      <View>
+        {
+          !loading && repositoryOwner ?
+            <FlatList data={repositoryOwner.repositories.nodes} renderItem={({item}) => <Text>{item.name}</Text>}></FlatList>
+            :
+            <Text>Carregando!</Text>
+        }
+      </View>
+    </Container>
+
 const query = gql`
-  query LastRepositories($username: String) {
+  query LastRepositories($username: String!) {
     repositoryOwner (login: $username) {
       repositories(last: 10) {
         nodes {
@@ -29,15 +44,8 @@ const query = gql`
 `;
 
 const data = graphql(query, {
-  options: (props) => {
-    variables: {username: props.username}
-  }
+  options: (props) => ({variables: { username: props.username } }),
 });
-
-const Page = ({data: { loading, repositories}}) =>
-    <Container>
-      <FlatList data={repositories} renderItem={({item}) => <Text>{item.key}</Text>}></FlatList>
-    </Container>
 
 export default compose(
   data,

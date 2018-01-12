@@ -36,9 +36,8 @@ const Username = styled.TextInput `
   height: 50px;
   color: #006;
   padding-left: 10px;
+  text-align: center;
 `;
-
-const username = withState('username', 'setUsername');
 
 const Page = ({username, setUsername}) =>
   <Container>
@@ -49,7 +48,10 @@ const Page = ({username, setUsername}) =>
     <List username={username}/>
   </Container>
 
+const username = withState('username', 'setUsername', 'medson10');
+
+
 export default compose(
   username,
-  pure,
+  pure
 )(Page);

@@ -20,7 +20,7 @@ const Container = styled.View `
 const client = new ApolloClient({
   link: new HttpLink(
     { uri: 'https://api.github.com/graphql',
-      headers: {'Authorization': 'Bearer <put your token here>'}
+      headers: {'Authorization': 'Bearer <put your github token here>'}
     }),
   cache: new InMemoryCache()
 });
