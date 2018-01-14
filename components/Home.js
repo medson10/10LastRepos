@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {FlatList, Text} from 'react-native';
+import {FlatList, Text, Button, View} from 'react-native';
 import { setContext } from 'apollo-link-context';
-import {compose, withStateHandlers, withState, pure} from 'recompose';
+import {compose, withStateHandlers, withState, pure, branch} from 'recompose';
 import List from './List';
 
 const Container = styled.View `
@@ -11,7 +11,6 @@ const Container = styled.View `
   flex-direction: column;
   align-items: center;
   height: 100%;
-  margin-top: 30px;
 `;
 
 const Title = styled.Text `
@@ -19,6 +18,7 @@ const Title = styled.Text `
   background-color: #006;
   font-size: 40px;
   padding: 0 95px;
+  margin-top: 25px;
 `;
 
 const InputForm = styled.View`
@@ -28,6 +28,7 @@ const InputForm = styled.View`
   justify-content: space-around;
   align-items: center;
   margin-top: 40px;
+  margin-bottom: 25px;
 `;
 
 const Username = styled.TextInput `
@@ -39,19 +40,28 @@ const Username = styled.TextInput `
   text-align: center;
 `;
 
-const Page = ({username, setUsername}) =>
+const username = withState('username', 'setUsername', 'medson10');
+const search = withState('search', 'setSearch', true);
+
+const Page = ({username, setUsername, search, setSearch}) =>
   <Container>
     <Title>Astrohub</Title>
     <InputForm>
-      <Username placeholder="Github Username" underlineColorAndroid={'#006'} clearButtonMode={'unless-editing'} type="text" value={ username } onChange={(e) => setUsername(e.target.value)}/>
+      <Username placeholder="Github Username" underlineColorAndroid={'#006'} clearButtonMode={'unless-editing'} type="text" value={ username } onChange={(e) => setUsername(e.target.value)} disabled={search}/>
+      {
+        search ?
+          <Button title="Clear" onPress={(e) => setSearch(!search)}></Button>
+          :
+          <Button title="Search" onPress={(e) => setSearch(!search)}></Button>
+      }
     </InputForm>
-    <List username={username}/>
+    <View>
+      <List username={username} search={search}/>
+    </View>
   </Container>
-
-const username = withState('username', 'setUsername', 'medson10');
-
 
 export default compose(
   username,
+  search,
   pure
 )(Page);
