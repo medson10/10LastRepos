@@ -17,21 +17,28 @@ const Container = styled.View`
   align-items: center;
 `;
 
-const Page = (props) =>
+const InstructionsText = styled.Text`
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 30px;
+`;
+
+const Page = () =>
   <View></View>
 
 const List = (props) =>
     <View>
-      <Repositories username={props.username}/>
+      <Repositories username={props.username} />
     </View>
 
-const About = () =>
+const Instructions = () =>
   <View>
-    <Text>Put a github username and press search</Text>
+    <InstructionsText>Enter a valid Github username</InstructionsText>
   </View>
 
 export default branch(
-  props => props.search,
+  props => props.username,
   renderComponent(List),
-  renderComponent(About),
+  renderComponent(Instructions),
+  pure
 )(Page);
