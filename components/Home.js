@@ -19,6 +19,7 @@ const Title = styled.Text `
   font-size: 40px;
   padding: 0 95px;
   margin-top: 25px;
+  width: 100%;
 `;
 
 const InputForm = styled.View`
@@ -38,30 +39,23 @@ const Username = styled.TextInput `
   color: #006;
   padding-left: 10px;
   text-align: center;
+  font-size: 15px;
 `;
 
-const username = withState('username', 'setUsername', 'medson10');
-const search = withState('search', 'setSearch', false);
+const username = withState('username', 'setUsername', '');
 
-const Page = ({username, setUsername, search, setSearch}) =>
+const Page = ({username, setUsername}) =>
   <Container>
     <Title>Astrohub</Title>
     <InputForm>
-      <Username placeholder="Github Username" underlineColorAndroid={'#006'} clearButtonMode={'unless-editing'} type="text" value={ username } onChange={(e) => setUsername(e.target.value)} disabled={search}/>
-      {
-        search ?
-          <Button title="Clear" onPress={(e) => setSearch(!search)}></Button>
-          :
-          <Button title="Search" onPress={(e) => setSearch(!search)}></Button>
-      }
+      <Username placeholder="Github Username" underlineColorAndroid={'#006'} type="text" value={ username } onChangeText={(text) => setUsername(text)}/>
     </InputForm>
     <View>
-      <List username={username} search={search}/>
+      <List username={username} />
     </View>
   </Container>
 
 export default compose(
   username,
-  search,
   pure
 )(Page);
