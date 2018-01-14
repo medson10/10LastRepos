@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import { compose, pure, branch, renderComponent, shouldUpdate } from 'recompose';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import Repositories from './Repositories';
 
 const Container = styled.View`
   background-color: #EFEFEF;
@@ -16,19 +17,12 @@ const Container = styled.View`
   align-items: center;
 `;
 
-const Page = () =>
+const Page = (props) =>
   <View></View>
 
-const List = ({data: { loading, repositoryOwner}}) =>
+const List = (props) =>
     <View>
-      {
-        !loading && repositoryOwner ?
-          <Container>
-            <FlatList keyExtractor={(item, index) => index} data={repositoryOwner.repositories.nodes} renderItem={({item}) => <Text>{item.name}</Text>}></FlatList>
-          </Container>
-          :
-          <Text>Loading...</Text>
-      }
+      <Repositories username={props.username}/>
     </View>
 
 const About = () =>
@@ -36,36 +30,8 @@ const About = () =>
     <Text>Put a github username and press search</Text>
   </View>
 
-
-const query = gql`
-  query LastRepositories($username: String!) {
-    repositoryOwner (login: $username) {
-      repositories(last: 10) {
-        nodes {
-          name
-          description
-          forkCount
-          isPrivate
-        }
-      }
-    }
-  }
-`;
-
-const data = graphql(query, {
-  options: (props) => ({variables: { username: props.username }, errorPolicy: 'all' }),
-});
-
-const ListComponent = compose(
-  shouldUpdate(
-    (props) => !props.search
-  ),
-  data,
-  pure
-)(List);
-
 export default branch(
   props => props.search,
-  renderComponent(ListComponent),
+  renderComponent(List),
   renderComponent(About),
 )(Page);

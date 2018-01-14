@@ -41,7 +41,7 @@ const Username = styled.TextInput `
 `;
 
 const username = withState('username', 'setUsername', 'medson10');
-const search = withState('search', 'setSearch', true);
+const search = withState('search', 'setSearch', false);
 
 const Page = ({username, setUsername, search, setSearch}) =>
   <Container>
