@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList } from 'react-native';
 import styled from 'styled-components/native';
-import {compose, pure} from 'recompose';
+import { compose, pure, branch, renderComponent, shouldUpdate } from 'recompose';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 
@@ -9,24 +9,33 @@ const Container = styled.View`
   background-color: #EFEFEF;
   border: .6px solid #333;
   margin-top: 20px;
-  width: 340px;
-  height: 420px;
+  width: 320px;
+  height: 320px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const Page = ({data: { loading, repositoryOwner}}) =>
-    <Container>
-      <View>
-        {
-          !loading && repositoryOwner ?
-            <FlatList data={repositoryOwner.repositories.nodes} renderItem={({item}) => <Text>{item.name}</Text>}></FlatList>
-            :
-            <Text>Carregando!</Text>
-        }
-      </View>
-    </Container>
+const Page = () =>
+  <View></View>
+
+const List = ({data: { loading, repositoryOwner}}) =>
+    <View>
+      {
+        !loading && repositoryOwner ?
+          <Container>
+            <FlatList keyExtractor={(item, index) => index} data={repositoryOwner.repositories.nodes} renderItem={({item}) => <Text>{item.name}</Text>}></FlatList>
+          </Container>
+          :
+          <Text>Loading...</Text>
+      }
+    </View>
+
+const About = () =>
+  <View>
+    <Text>Put a github username and press search</Text>
+  </View>
+
 
 const query = gql`
   query LastRepositories($username: String!) {
@@ -44,10 +53,19 @@ const query = gql`
 `;
 
 const data = graphql(query, {
-  options: (props) => ({variables: { username: props.username } }),
+  options: (props) => ({variables: { username: props.username }, errorPolicy: 'all' }),
 });
 
-export default compose(
+const ListComponent = compose(
+  shouldUpdate(
+    (props) => !props.search
+  ),
   data,
   pure
+)(List);
+
+export default branch(
+  props => props.search,
+  renderComponent(ListComponent),
+  renderComponent(About),
 )(Page);
