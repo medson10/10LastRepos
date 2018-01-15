@@ -11,13 +11,14 @@ const Container = styled.View `
   flex-direction: column;
   align-items: center;
   height: 100%;
+  width: 100%;
 `;
 
 const Title = styled.Text `
   color: #FFF;
   background-color: #006;
-  font-size: 40px;
-  padding: 0 95px;
+  font-size: 33px;
+  padding: 15px 95px;
   margin-top: 25px;
   width: 100%;
 `;
@@ -29,7 +30,11 @@ const InputForm = styled.View`
   justify-content: space-around;
   align-items: center;
   margin-top: 40px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
+`;
+
+const ListView = styled.View`
+  height: 900px;
 `;
 
 const Username = styled.TextInput `
@@ -46,13 +51,13 @@ const username = withState('username', 'setUsername', '');
 
 const Page = ({username, setUsername}) =>
   <Container>
-    <Title>Astrohub</Title>
+    <Title>ASTROHUB</Title>
     <InputForm>
       <Username placeholder="Github Username" underlineColorAndroid={'#006'} type="text" value={ username } onChangeText={(text) => setUsername(text)}/>
     </InputForm>
-    <View>
+    <ListView>
       <List username={username} />
-    </View>
+    </ListView>
   </Container>
 
 export default compose(
