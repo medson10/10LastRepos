@@ -8,10 +8,13 @@ const Container = styled.View`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #49F;
+  border-radius: 60;
+  padding: 10px 10px;
 `;
 
 const Item = styled.Text`
-  color: #555;
+  color: #FFF;
   text-align: center;
   font-size: 14px;
   margin-top: 8px;
