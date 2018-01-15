@@ -15,11 +15,13 @@ const Container = styled.View `
   flex-direction: column;
   align-items: center;
   height: 100%;
+  width: 100%;
 `;
 
 const client = new ApolloClient({
   link: new HttpLink(
-    { uri: 'https://api.github.com/graphql',
+    {
+      uri: 'https://api.github.com/graphql',
       headers: {'Authorization': 'Bearer <put your github token here>'}
     }),
   cache: new InMemoryCache()
