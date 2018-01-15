@@ -1,26 +1,18 @@
 import React from 'react';
 import { View, Text, FlatList } from 'react-native';
 import styled from 'styled-components/native';
-import { compose, pure, branch, renderComponent, shouldUpdate } from 'recompose';
+import { compose, pure, branch, renderComponent } from 'recompose';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import Repositories from './Repositories';
 
-const Container = styled.View`
-  background-color: #EFEFEF;
-  border: .6px solid #333;
-  margin-top: 20px;
-  width: 320px;
-  height: 320px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const InstructionsText = styled.Text`
   font-weight: bold;
-  font-size: 14px;
-  margin-top: 30px;
+  font-size: 16px;
+  text-align: center;
+  margin: 30px 40px;
+  line-height: 40px;
+  color: #444;
 `;
 
 const Page = () =>
@@ -33,7 +25,9 @@ const List = (props) =>
 
 const Instructions = () =>
   <View>
-    <InstructionsText>Enter a valid Github username</InstructionsText>
+    <InstructionsText>This is Astrohub, an app built with react-native, apollo,
+    recompose and styled-components, in which the last 10 repositories of a github user are listed.
+    To use it, enter a valid github username in the field above.</InstructionsText>
   </View>
 
 export default branch(
